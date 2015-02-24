@@ -8,6 +8,6 @@ You can choose to the Spring Boot CLi version of this sample:
 
 Or you can check out the Spring Boot Java-based version:
 
-. mvn clean spring:boot:run
+. mvn clean spring-boot:run
 
 Either of these options will let you poke around with a simple example of Spring Data REST.
