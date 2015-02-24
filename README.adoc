@@ -1,5 +1,13 @@
 == How to run
 
+You can choose to the Spring Boot CLi version of this sample:
+
 . Install Spring Boot CLI
 . spring jar app.jar sample.groovy && java -jar app.jar 
 . In another shell, use curl to interrogate the service
+
+Or you can check out the Spring Boot Java-based version:
+
+. mvn clean spring:boot:run
+
+Either of these options will let you poke around with a simple example of Spring Data REST.
