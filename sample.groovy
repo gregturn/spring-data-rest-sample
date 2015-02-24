@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.OneToOne
+import javax.persistence.OneToMany
 
 @Entity
 class Person {
@@ -20,8 +20,8 @@ class Person {
 	String firstName
 	String lastName
 
-	@OneToOne
-	Address address
+	@OneToMany
+	List<Address> addresses
 }
 
 @Entity
@@ -44,7 +44,7 @@ interface NoAddresses {
 interface InlineAddress {
 	String getFirstName()
 	String getLastName()
-	Address getAddress()
+	List<Address> getAddresses()
 }
 
 @RepositoryRestResource(excerptProjection = InlineAddress)
@@ -69,10 +69,15 @@ class DataLoader {
 		personRepository.save(new Person(
 			firstName: "Frodo", 
 			lastName: "Baggins", 
-			address: addressRepository.save(new Address(
-				street: "Bag End", 
-				state: "The Shire", 
-				country: "Middle Earth"))))
+			addresses: [
+				addressRepository.save(new Address(
+					street: "Bag End", 
+					state: "The Shire", 
+					country: "Middle Earth")),
+				addressRepository.save(new Address(
+					street: "The Undying Lands",
+					state: "Ships",
+					country: "Elven Lands"))]))
 	}
 
 }
