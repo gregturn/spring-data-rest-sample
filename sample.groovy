@@ -40,14 +40,14 @@ interface NoAddresses {
 	String getLastName()
 }
 
-//@Projection(name = 'inlineAddress', types = [Person])
+@Projection(name = 'inlineAddress', types = [Person])
 interface InlineAddress {
 	String getFirstName()
 	String getLastName()
 	Address getAddress()
 }
 
-//@RepositoryRestResource(excerptProjection = InlineAddress)
+@RepositoryRestResource(excerptProjection = InlineAddress)
 interface PersonRepository extends CrudRepository<Person, Long> {}
 
 interface AddressRepository extends CrudRepository<Address, Long> {}

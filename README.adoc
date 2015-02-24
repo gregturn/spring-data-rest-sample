@@ -1,0 +1,5 @@
+== How to run
+
+. Install Spring Boot CLI
+. spring jar app.jar sample.groovy && java -jar app.jar 
+. In another shell, use curl to interrogate the service
