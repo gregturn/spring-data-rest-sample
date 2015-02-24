@@ -11,3 +11,76 @@ Or you can check out the Spring Boot Java-based version:
 . mvn clean spring-boot:run
 
 Either of these options will let you poke around with a simple example of Spring Data REST.
+
+== What you'll see
+
+----
+$ curl localhost:8080/persons
+----
+
+It will yield:
+
+[source,javascript]
+----
+{
+  "_embedded" : {
+    "persons" : [ {
+      "firstName" : "Frodo",
+      "lastName" : "Baggins",
+      "addresses" : [ {
+        "street" : "Bag End",
+        "state" : "The Shire",
+        "country" : "Middle Earth"
+      }, {
+        "street" : "The Undying Lands",
+        "state" : "Ships",
+        "country" : "Elven Lands"
+      } ],
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/persons/1{?projection}",
+          "templated" : true
+        },
+        "addresses" : {
+          "href" : "http://localhost:8080/persons/1/addresses"
+        }
+      }
+    } ]
+  }
+}
+----
+
+This shows an excerpt projection being applied. It causes the address resources to get inlined. You can still navigate to that collection.
+
+----
+$ curl localhost:8080/persons/1/addresses
+----
+
+This will show links for each address:
+
+[source,javascript]
+----
+{
+  "_embedded" : {
+    "addresses" : [ {
+      "street" : "Bag End",
+      "state" : "The Shire",
+      "country" : "Middle Earth",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/addresses/1"
+        }
+      }
+    }, {
+      "street" : "The Undying Lands",
+      "state" : "Ships",
+      "country" : "Elven Lands",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/addresses/2"
+        }
+      }
+    } ]
+  }
+}
+----
